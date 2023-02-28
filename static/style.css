@@ -28,3 +28,9 @@ body {
     margin-left: 32.5%;
     margin-right: 32.5%;
 }
+
+.separator {
+  border-bottom: 1px solid #FE365C;
+  width: 80%;
+  margin: 0 auto;
+}
