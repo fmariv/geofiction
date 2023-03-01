@@ -1,61 +1,69 @@
 <html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="author" content="Fran Martín | fmartinrivas2@gmail.com">
-    <meta name="description" content="Create fake spatial data for testing and development">
-    <meta name="copyright" content="Fran Martín"/>
+   <head>
+      <meta charset="UTF-8">
+      <meta name="author" content="Fran Martín | fmartinrivas2@gmail.com">
+      <meta name="description" content="Create fake spatial data for testing and development">
+      <meta name="copyright" content="Fran Martín"/>
+      {% block head %}
+      <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+      {% endblock %}
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+      <link href="https://fonts.googleapis.com/css?family=Roboto:300,500,700" rel="stylesheet">
+      <title>Geofiction</title>
+   </head>
+   <body>
+      <div id="page-wrapper">
+         <div id="wrapper">
+            <img id="logo" src="static/logo.png" />
+            <form>
+               <div class="form-row">
+                  <div id="fields-aggregate">
+                        <div class="form-group row">
+                        <div class="col-md-3 mb-3">
+                           <label for="field-name">Field name</label>
+                           <input type="text" class="form-control" id="field-name" placeholder="Field" required>
+                      </div>
+                      <div class="col-md-3 mb-3">
+                        <label for="field-type">Field type</label>
+                         <select class="form-control" id="field-type">
+                            <option selected>Text</option>
+                              <option>Integer</option>
+                         </select>
+                      </div>
+                     </div>
+                  </div>
+               <button class="btn btn-danger" onclick="addField()">ADD ANOTHER FIELD</button>
+               <div class="separator"></div>
 
-    {% block head %}
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
-        <link rel="stylesheet" href="{{ url_for('static', filename='uikit/css/uikit.css') }}" />
-        <script src="{{ url_for('static', filename='uikit/js/uikit.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='uikit/js/uikit-icons.min.js') }}"></script>
-    {% endblock %}
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,500,700" rel="stylesheet">
-
-    <title>Geofiction</title>
-
-</head>
-<body>
-
-<div id="page-wrapper">
-    <div id="wrapper">
-        <img id="logo" src="static/logo.png" />
-        <form class="uk-form-horizontal">
-          <div class="uk-grid-small" uk-grid>
-            <div class="uk-width-1-4@s">
-              <input class="uk-input" type="text" placeholder="50" aria-label="50">
-            </div>
-            <div class="uk-width-1-4@s">
-              <input class="uk-input" type="text" placeholder="50" aria-label="50">
-            </div>
-            <a href="" uk-icon="icon: close; ratio: 1.15"></a>
-          </div>
-          <button class="uk-button uk-button-primary">ADD ANOTHER FIELD</button>
-            <div class="separator"></div>
-              <div class="uk-margin">
-                <label class="uk-form-label"># Features</label>
-                <input class="uk-input uk-form-width-small" type="number" placeholder="1000" aria-label="Small">
-              </div>
-        
-                <div class="uk-margin">
-                  <label class="uk-form-label">Geometry type</label>
-                  <select class="uk-select uk-form-width-small" aria-label="Select">
-                      <option>Point</option>
-                      <option>Line</option>
-                      <option>Polygon</option>
-                  </select>
-                </div>
-        
-                <div class="uk-margin">
-                    <label class="uk-form-label">Multigeometry</label>
-                    <input class="uk-checkbox" type="checkbox">
-                </div> 
-          <input class="uk-button uk-button-primary" type="submit" value="DOWNLOAD DATA">
-        </form>
-
-    </div>
-</div>
-
-</body>
+               <input class="btn btn-danger" type="submit" value="DOWNLOAD DATA">
+               </div>
+            </form>
+         </div>
+      </div>
+   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" ></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" ></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+   <script>
+      function dropField(elem) {
+         let parentNodeId = elem.parentNode.id
+         let numChildNodes = document.getElementById("fields-aggregate").children.length;
+         if (numChildNodes != 1) {
+            document.getElementById(parentNodeId).remove();
+         } else {
+            alert('You can not drop all fields')
+         }
+      }
+      function addField() {
+         let newField = document.getElementById("fields-aggregate").firstElementChild;
+         let fieldsAggregate = document.getElementById("fields-aggregate")
+         let numChildNodes = document.getElementById("fields-aggregate").children.length;
+         if (numChildNodes < 5) {
+            fieldsAggregate.appendChild(newField.cloneNode(true));
+         } else {
+            alert('You can not add more than 5 fields')
+         }
+      }
+   </script>
+   </body>
 </html>
