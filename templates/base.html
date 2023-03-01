@@ -6,7 +6,10 @@
     <meta name="copyright" content="Fran Martín"/>
 
     {% block head %}
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='uikit/css/uikit.css') }}" />
+        <script src="{{ url_for('static', filename='uikit/js/uikit.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='uikit/js/uikit-icons.min.js') }}"></script>
     {% endblock %}
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,500,700" rel="stylesheet">
 
@@ -18,14 +21,37 @@
 <div id="page-wrapper">
     <div id="wrapper">
         <img id="logo" src="static/logo.png" />
-        <div class="separator"></div>
-        <form>
-          <label for="fname"># Rows:</label><br>
-          <input type="text" id="fname" name="fname"><br>
-          <label for="lname">Format:</label><br>
-          <input type="text" id="lname" name="lname">
+        <form class="uk-form-horizontal">
+          <div class="uk-grid-small" uk-grid>
+            <div class="uk-width-1-4@s">
+              <input class="uk-input" type="text" placeholder="50" aria-label="50">
+            </div>
+            <div class="uk-width-1-4@s">
+              <input class="uk-input" type="text" placeholder="50" aria-label="50">
+            </div>
+            <a href="" uk-icon="icon: close; ratio: 1.15"></a>
+          </div>
+          <button class="uk-button uk-button-primary">ADD ANOTHER FIELD</button>
             <div class="separator"></div>
-          <input type="submit" value="Generate">
+              <div class="uk-margin">
+                <label class="uk-form-label"># Features</label>
+                <input class="uk-input uk-form-width-small" type="number" placeholder="1000" aria-label="Small">
+              </div>
+        
+                <div class="uk-margin">
+                  <label class="uk-form-label">Geometry type</label>
+                  <select class="uk-select uk-form-width-small" aria-label="Select">
+                      <option>Point</option>
+                      <option>Line</option>
+                      <option>Polygon</option>
+                  </select>
+                </div>
+        
+                <div class="uk-margin">
+                    <label class="uk-form-label">Multigeometry</label>
+                    <input class="uk-checkbox" type="checkbox">
+                </div> 
+          <input class="uk-button uk-button-primary" type="submit" value="DOWNLOAD DATA">
         </form>
 
     </div>
